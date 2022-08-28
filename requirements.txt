@@ -1,0 +1,2 @@
+pysondb-v2==v2.1.0
+click==8.1.3
