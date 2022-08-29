@@ -1,3 +1,4 @@
 docopt==0.6.2
 pysondb-v2==v2.1.0
 rich==v12.5.1
+xdg==5.1.1
