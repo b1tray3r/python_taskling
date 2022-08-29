@@ -1,8 +1,6 @@
-from ast import arg
 from unittest import TestCase
 
 from docopt import docopt
-from docopt import DocoptExit
 
 usage = """Taskling
 

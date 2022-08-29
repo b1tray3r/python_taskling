@@ -30,15 +30,12 @@ Options:
     --find                  Search for a task
 
 """
-import json
-import logging
-
 from docopt import docopt
-from rich.logging import RichHandler
 
 
 def main():
-    arguments = docopt(__doc__, version="Taskling 1.0")
+    args = docopt(__doc__, version="Taskling 1.0")
+    print(args)
 
 
 if __name__ == "__main__":
