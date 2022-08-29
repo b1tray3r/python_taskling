@@ -30,7 +30,12 @@ Options:
     --find                  Search for a task
 
 """
+import os
+
+from Database import Database
 from docopt import docopt
+from Task import Task
+from xdg import xdg_config_home
 
 
 def main():
@@ -40,3 +45,13 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    if not os.path.isdir(f"{xdg_config_home()}/taskling/"):
+        os.makedirs(f"{xdg_config_home()}/taskling/")
+
+    active = Database(f"{xdg_config_home()}/taskling/active.json")
+
+    new_id = active.create(Task("test", "desc"))
+    active.update(new_id, Task("test2", "better desc", note=True))
+
+    print(active.delete(new_id))
