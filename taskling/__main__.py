@@ -1,14 +1,8 @@
-from ast import arg
-from unittest import TestCase
-
-from docopt import docopt
-from docopt import DocoptExit
-
-usage = """Taskling
+"""Taskling
 
 Usage:
     taskling
-    taskling --create [--note] [--due=<date>] [--board=<board>] <name> <description>...
+    taskling --create [--note] [--due=<date>] [--board=<board>] <task> <description>...
     taskling --edit [--due=<date>] [--board=<board>] <taskid> [<description>...]
     taskling (--delete | --restore) <taskid>...
     taskling (--begin | --check) <taskid>...
@@ -36,33 +30,16 @@ Options:
     --find                  Search for a task
 
 """
+import json
+import logging
+
+from docopt import docopt
+from rich.logging import RichHandler
 
 
-class CLITests(TestCase):
-    def test_cli(self):
-        cmd = [
-            "-c",
-            "-n",
-            "--due",
-            "2022-01-01",
-            "--board",
-            "testboard",
-            "taskname",
-            "a",
-            "description",
-            "message",
-        ]
-        args = docopt(usage, argv=cmd)
-        self.assertTrue(args["--create"])
-        self.assertTrue(args["--note"])
-        self.assertEqual(args["--due"], "2022-01-01")
-        self.assertEqual(args["--board"], "testboard")
-        self.assertEqual(args["<name>"], "taskname")
-        self.assertEqual(
-            args["<description>"], ["a", "description", "message"]
-        )
+def main():
+    arguments = docopt(__doc__, version="Taskling 1.0")
 
-        cmd = ["--delete", "1"]
-        args = docopt(usage, argv=cmd)
-        self.assertTrue(args["--delete"])
-        self.assertEqual(args["<taskid>"], ["1"])
+
+if __name__ == "__main__":
+    main()
